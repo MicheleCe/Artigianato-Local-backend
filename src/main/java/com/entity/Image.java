@@ -24,6 +24,7 @@ public class Image {
 	@Id
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
+
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "product_id")
