@@ -3,6 +3,7 @@ package com.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -43,14 +44,24 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public ResponseEntity<String> delete(String id) {
 		try {
-			pr.deleteById(id);
-			return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+			Optional<Product> productOptional = pr.findById(id);
+			if (productOptional.isPresent()) {
+				Product product = productOptional.get();
+				List<Image> imagesToDelete = product.getImages();
+				for (Image image : imagesToDelete) {
+					ir.delete(image);
+				}
+				pr.deleteById(id);
+				System.out.println("Entry deleted successfully.");
+				return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+			} else {
+				return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+			}
 		} catch (IllegalArgumentException e) {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		} catch (Exception e) {
-
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@Override
