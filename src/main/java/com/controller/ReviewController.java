@@ -19,19 +19,19 @@ import com.service.ReviewService;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/review")
+@RequestMapping("api")
 public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
 
-	@PostMapping("/create")
-	public ResponseEntity<String> createReview(@RequestBody ReviewDTO reviewDTO) {
-		ResponseEntity<Review> createdReview = reviewService.createReview(reviewDTO);
-		return ResponseEntity.ok("Review created successfully with ID: " + createdReview);
+	@PostMapping("/review")
+	public ResponseEntity<Review> createReview(@RequestBody ReviewDTO reviewDTO) {
+		Review createdReview = reviewService.createReview(reviewDTO);
+		return new ResponseEntity<>(createdReview, HttpStatus.OK);
 	}
 
-	@GetMapping("/product/{productId}")
+	@GetMapping("/review/{productId}")
 	public ResponseEntity<List<Review>> getReviewsForProduct(@PathVariable String productId) {
 		List<Review> reviews = reviewService.getReviewsForProduct(productId);
 		return new ResponseEntity<>(reviews, HttpStatus.OK);

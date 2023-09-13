@@ -116,6 +116,7 @@ public class ProductServiceImpl implements ProductService {
 			images.add(image);
 			product.getImages().add(image);
 		}
+
 		ir.saveAll(images);
 		pr.save(product);
 
