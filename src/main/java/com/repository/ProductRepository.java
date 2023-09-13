@@ -9,5 +9,4 @@ import com.entity.Product;
 public interface ProductRepository extends JpaRepository<Product, String> {
 
 	List<Product> findByUserUserId(String userId);
-
 }

@@ -123,4 +123,10 @@ public class ProductServiceImpl implements ProductService {
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseEntity<Product> findById(String productId) {
+		Optional<Product> product = pr.findById(productId);
+		return new ResponseEntity<>(product.get(), HttpStatus.OK);
+	}
+
 }

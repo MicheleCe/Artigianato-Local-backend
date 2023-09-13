@@ -19,4 +19,6 @@ public interface ProductService {
 
 	public List<Product> getProductsByUserId(String userId);
 
+	public ResponseEntity<Product> findById(String productId);
+
 }
