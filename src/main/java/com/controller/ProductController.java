@@ -61,4 +61,9 @@ public class ProductController {
 		}
 	}
 
+	@GetMapping("/getProductById/{productId}")
+	public ResponseEntity<Product> getProductById(@PathVariable String productId) {
+		return ps.findById(productId);
+	}
+
 }
