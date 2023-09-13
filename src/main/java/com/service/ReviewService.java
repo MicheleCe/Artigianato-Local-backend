@@ -2,14 +2,12 @@ package com.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import com.dto.ReviewDTO;
 import com.entity.Review;
 
 public interface ReviewService {
 
-	public ResponseEntity<Review> createReview(ReviewDTO review);
+	public Review createReview(ReviewDTO review);
 
 	public List<Review> getReviewsForProduct(String productId);
 

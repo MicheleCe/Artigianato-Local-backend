@@ -15,4 +15,6 @@ public class ReviewDTO {
 
 	private String comment;
 
+	private Integer rating;
+
 }

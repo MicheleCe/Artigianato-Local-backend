@@ -3,8 +3,6 @@ package com.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.dto.ReviewDTO;
@@ -29,7 +27,7 @@ public class ReviewServiceImpl implements ReviewService {
 	private UserRepo ur;
 
 	@Override
-	public ResponseEntity<Review> createReview(ReviewDTO reviewDTO) {
+	public Review createReview(ReviewDTO reviewDTO) {
 
 		User user = ur.findById(reviewDTO.getUserId())
 				.orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + reviewDTO.getUserId()));
@@ -40,9 +38,37 @@ public class ReviewServiceImpl implements ReviewService {
 		review.setUser(user);
 		review.setProduct(product);
 		review.setComment(reviewDTO.getComment());
+		review.setRating(reviewDTO.getRating());
+		product.getReviews().add(review);
+
+		pr.save(product);
+		rr.save(review);
+
+		int totalRating = 0;
+		int totalReviews = product.getReviews().size();
+
+		for (Review productReview : product.getReviews()) {
+			System.out.println(productReview.getRating());
+			Integer reviewValue = productReview.getRating();
+			if (reviewValue != null) {
+
+				totalRating += reviewValue;
+			}
+
+		}
+
+		if (totalReviews > 0) {
+			double productRating = (double) totalRating / totalReviews;
+			product.setProductRating(productRating);
+			pr.save(product);
+		} else {
+			product.setProductRating(0.0);
+			pr.save(product);
+		}
 
 		rr.save(review);
-		return new ResponseEntity<>(review, HttpStatus.OK);
+
+		return review;
 	}
 
 	@Override

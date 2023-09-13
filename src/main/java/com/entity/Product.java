@@ -46,13 +46,17 @@ public class Product {
 
 	private String description;
 
+	@Column(name = "rating", nullable = true)
+	private Double productRating = 0.0;
+
 	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(name = "product_categories", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-	private List<Review> reviews = new ArrayList<>();
+	private List<Review> reviews = new ArrayList<>(0);
 
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Image> images = new ArrayList<>();

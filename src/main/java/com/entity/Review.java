@@ -24,6 +24,7 @@ public class Review {
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String id;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -34,5 +35,7 @@ public class Review {
 	private Product product;
 
 	private String comment;
+
+	private Integer rating;
 
 }
