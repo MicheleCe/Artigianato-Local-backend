@@ -41,32 +41,23 @@ public class ReviewServiceImpl implements ReviewService {
 		review.setRating(reviewDTO.getRating());
 		product.getReviews().add(review);
 
-		pr.save(product);
-		rr.save(review);
-
 		int totalRating = 0;
 		int totalReviews = product.getReviews().size();
-
 		for (Review productReview : product.getReviews()) {
-			System.out.println(productReview.getRating());
 			Integer reviewValue = productReview.getRating();
 			if (reviewValue != null) {
-
 				totalRating += reviewValue;
 			}
-
 		}
-
 		if (totalReviews > 0) {
 			double productRating = (double) totalRating / totalReviews;
 			product.setProductRating(productRating);
-			pr.save(product);
 		} else {
 			product.setProductRating(0.0);
-			pr.save(product);
 		}
 
 		rr.save(review);
+		pr.save(product);
 
 		return review;
 	}
