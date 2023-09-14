@@ -49,6 +49,8 @@ public class Product {
 	@Column(name = "rating", nullable = true)
 	private Double productRating = 0.0;
 
+	List<String> linkedCategoryId = new ArrayList<>();
+
 	@JsonIgnore
 	@ManyToMany()
 	@JoinTable(name = "product_categories", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
@@ -61,6 +63,7 @@ public class Product {
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Image> images = new ArrayList<>();
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "ordine_id")
 	private Ordine order;

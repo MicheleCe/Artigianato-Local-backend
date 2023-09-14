@@ -14,6 +14,7 @@ import com.dto.ProductDTO;
 import com.entity.Category;
 import com.entity.Image;
 import com.entity.Product;
+import com.entity.User;
 import com.repository.CategoryRepository;
 import com.repository.ImageRepository;
 import com.repository.ProductRepository;
@@ -93,7 +94,8 @@ public class ProductServiceImpl implements ProductService {
 		product.setName(productDTO.getName());
 		product.setPrice(productDTO.getPrice());
 		product.setDescription(productDTO.getDescription());
-		product.setUser(ur.findById(productDTO.getUserId()).get());
+		User user = ur.findById(productDTO.getUserId()).get();
+		product.setUser(user);
 
 		List<Category> categories = new ArrayList<>();
 		for (String categoryId : productDTO.getCategoryId()) {
@@ -101,6 +103,7 @@ public class ProductServiceImpl implements ProductService {
 					.orElseThrow(() -> new EntityNotFoundException("Category not found with ID: " + categoryId));
 			categories.add(category);
 			category.getProducts().add(product);
+			product.getLinkedCategoryId().add("id: " + categoryId + " name: " + category.getName());
 
 			cr.save(category);
 		}

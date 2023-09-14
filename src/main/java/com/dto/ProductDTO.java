@@ -19,6 +19,8 @@ public class ProductDTO {
 
 	private String userId;
 
+	private Double productRating = 0.0;
+
 	private List<String> categoryId;
 
 	private List<byte[]> images;
