@@ -8,11 +8,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+
 @Entity
 public class User {
 
@@ -20,17 +23,21 @@ public class User {
 	@Column(name = "user_id")
 	@GeneratedValue(strategy = GenerationType.UUID)
 	private String userId;
+
 	@Column(name = "user_name", length = 255)
 	private String username;
+
 	private String role;
+
 	@Column(unique = true)
 	private String email;
+
 	private String password;
 
 	@OneToMany(mappedBy = "user")
 	private List<Ordine> orders;
 
-	@OneToMany
+	@OneToMany(mappedBy = "user")
 	private List<Product> products;
 
 	@OneToMany(mappedBy = "user")

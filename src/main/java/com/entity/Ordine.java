@@ -2,6 +2,8 @@ package com.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,17 +32,15 @@ public class Ordine {
 	@Column(name = "ordine_id")
 	private String ordineId;
 
-	private String phone;
-
-	private String address;
-
 	@Column(name = "is_paid")
 	private boolean isPaid;
 
+	@JsonIgnore
 	@ManyToMany
 	@JoinTable(name = "ordine_product", joinColumns = @JoinColumn(name = "ordine_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private List<Product> products;
 
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;

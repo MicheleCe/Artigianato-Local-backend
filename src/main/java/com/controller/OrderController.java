@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dto.OrderDTO;
 import com.entity.Ordine;
 import com.service.OrderService;
 
@@ -30,8 +31,8 @@ public class OrderController {
 	}
 
 	@PostMapping("/ordini")
-	public ResponseEntity<Ordine> post(@RequestBody Ordine ordine) {
-		return os.post(ordine);
+	public ResponseEntity<Ordine> post(@RequestBody OrderDTO orderDTO) {
+		return os.post(orderDTO);
 	}
 
 	@PatchMapping("/ordini")
