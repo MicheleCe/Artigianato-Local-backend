@@ -21,4 +21,6 @@ public interface ProductService {
 
 	public ResponseEntity<Product> findById(String productId);
 
+	public ResponseEntity<List<Product>> getProductsByNameStartingWith(String name);
+
 }
