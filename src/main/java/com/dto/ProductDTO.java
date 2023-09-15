@@ -9,6 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
+
 public class ProductDTO {
 
 	private String name;

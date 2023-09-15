@@ -90,6 +90,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ResponseEntity<Product> post(ProductDTO productDTO) {
+		System.out.println(productDTO);
 		Product product = new Product();
 		product.setName(productDTO.getName());
 		product.setPrice(productDTO.getPrice());
@@ -101,6 +102,7 @@ public class ProductServiceImpl implements ProductService {
 		for (String categoryId : productDTO.getCategoryId()) {
 			Category category = cr.findById(categoryId)
 					.orElseThrow(() -> new EntityNotFoundException("Category not found with ID: " + categoryId));
+			System.err.println(category);
 			categories.add(category);
 			category.getProducts().add(product);
 			product.getLinkedCategoryId().add("id: " + categoryId + " name: " + category.getName());
