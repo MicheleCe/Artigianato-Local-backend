@@ -66,4 +66,11 @@ public class ProductController {
 		return ps.findById(productId);
 	}
 
+	@GetMapping("/nameStartsWith/{startsWith}")
+	public ResponseEntity<List<Product>> getProductsByNameStartsWith(@PathVariable String startsWith) {
+
+		ResponseEntity<List<Product>> products = ps.getProductsByNameStartingWith(startsWith);
+		return products;
+	}
+
 }

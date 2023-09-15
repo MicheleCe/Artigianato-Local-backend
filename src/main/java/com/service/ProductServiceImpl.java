@@ -134,4 +134,14 @@ public class ProductServiceImpl implements ProductService {
 		return new ResponseEntity<>(product.get(), HttpStatus.OK);
 	}
 
+	@Override
+	public ResponseEntity<List<Product>> getProductsByNameStartingWith(String name) {
+		List<Product> products = pr.findByNameStartingWith(name);
+		if (products.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(products, HttpStatus.OK);
+		}
+	}
+
 }
