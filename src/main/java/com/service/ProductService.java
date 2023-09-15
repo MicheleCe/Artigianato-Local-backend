@@ -13,7 +13,7 @@ public interface ProductService {
 
 	public ResponseEntity<String> delete(String id);
 
-	public ResponseEntity<Product> patch(Product product);
+	public ResponseEntity<Product> patch(ProductDTO productDTO);
 
 	public ResponseEntity<Product> post(ProductDTO productDTO);
 

@@ -75,7 +75,24 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public ResponseEntity<Product> patch(Product product) {
+	public ResponseEntity<Product> patch(ProductDTO productDTO) {
+		Product product = pr.findById(productDTO.getProductId()).get();
+		product.setName(productDTO.getName());
+		product.setPrice(productDTO.getPrice());
+		product.setDescription(productDTO.getDescription());
+		List<Image> images = product.getImages();
+		if (!productDTO.getImages().isEmpty()) {
+			images.clear();
+			for (byte[] imageData : productDTO.getImages()) {
+				Image image = new Image();
+				image.setImageData(imageData);
+				image.setProduct(product);
+				images.add(image);
+				product.getImages().add(image);
+			}
+		}
+
+		ir.saveAll(images);
 
 		try {
 			pr.save(product);
