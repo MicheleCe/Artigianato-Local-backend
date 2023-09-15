@@ -2,6 +2,8 @@ package com.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +39,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Ordine> orders;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Product> products;
 
