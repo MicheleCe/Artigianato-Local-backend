@@ -36,6 +36,7 @@ public class User {
 
 	private String password;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Ordine> orders;
 
@@ -43,6 +44,7 @@ public class User {
 	@OneToMany(mappedBy = "user")
 	private List<Product> products;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
 
