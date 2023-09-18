@@ -11,7 +11,7 @@ RUN mvn clean package -D skipTests
 # Package stage
 #
 FROM openjdk:17-alpine
-COPY --from=build /app/target/MarketPlace-0.0.1-SNAPSHOT.jar demo.jar
+COPY --from=build /app/target/e-commerce-0.0.1-SNAPSHOT.jar demo.jar
 # ENV PORT=8081
 EXPOSE 8081
 ENTRYPOINT ["java","-jar","demo.jar"]
